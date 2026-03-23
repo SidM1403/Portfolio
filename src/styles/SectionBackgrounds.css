@@ -1,0 +1,330 @@
+/* S-Tier Section Backgrounds */
+
+/* 1. Hero: Neural Grid Enhancement */
+.bg-neural-grid {
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+}
+
+.neural-pulse-dot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #00f3ff;
+    box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+    border-radius: 50%;
+    animation: neural-blink 4s infinite ease-in-out;
+}
+
+@keyframes neural-blink {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.8; transform: scale(1.5); }
+}
+
+/* 1b. Hero: Data Columns */
+.data-column {
+    position: absolute;
+    top: -100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #fcee0a;
+    opacity: 0.15;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    animation: gravity-fall linear infinite;
+}
+
+@keyframes gravity-fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(120vh); }
+}
+
+.name-shadow-pulse {
+    animation: shadow-pulse 4s infinite ease-in-out;
+}
+
+@keyframes shadow-pulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(252, 238, 10, 0.2); }
+    50% { text-shadow: 0 0 40px rgba(0, 240, 255, 0.4); }
+}
+
+/* 2. Identity: Biometric Circuitry */
+.bg-biometric-circuit {
+    background: radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.03) 0%, transparent 50%);
+    overflow: hidden;
+}
+
+.circuit-line {
+    position: absolute;
+    background: rgba(0, 243, 255, 0.08);
+    height: 1px;
+}
+
+.circuit-pulse {
+    position: absolute;
+    height: 100%;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, #00f3ff, transparent);
+    filter: blur(2px);
+    animation: circuit-flow 6s infinite linear;
+}
+
+@keyframes circuit-flow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(1000%); }
+}
+
+/* Biometric Laser Scan */
+.laser-scan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f3ff, transparent);
+    box-shadow: 0 0 15px #00f3ff, 0 0 30px rgba(0, 243, 255, 0.5);
+    z-index: 10;
+    animation: laser-sweep 4s infinite ease-in-out;
+}
+
+@keyframes laser-sweep {
+    0%, 100% { top: 0%; opacity: 0; }
+    5%, 95% { opacity: 1; }
+    50% { top: 100%; }
+}
+
+.char-typed {
+    animation: char-typed-blink 0.1s ease-out forwards;
+}
+
+@keyframes char-typed-blink {
+    0% { opacity: 0; filter: blur(4px); }
+    100% { opacity: 1; filter: blur(0px); }
+}
+
+/* 3. Systems: Hex-Logic Flow */
+.bg-hex-logic {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23fcee0a' fill-opacity='0.03' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.91v12.18l11 6.35 11-6.35V17.91L14 11.56l-11 6.35z'/%3E%3C/svg%3E");
+}
+
+.hex-flicker {
+    animation: hex-glow 3s infinite alternate;
+}
+
+@keyframes hex-glow {
+    0% { opacity: 0.05; }
+    100% { opacity: 0.15; }
+}
+
+/* Systems: Interactive Circuit Map */
+.circuit-node {
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background-color: rgba(252, 238, 10, 0.2);
+    border-width: 1px;
+    border-color: rgba(252, 238, 10, 0.4);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.circuit-node-active {
+    background-color: #fcee0a;
+    transform: scale(1.5);
+    box-shadow: 0 0 10px #fcee0a;
+}
+
+.circuit-line-path {
+    position: absolute;
+    background-color: rgba(252, 238, 10, 0.1);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+    overflow: hidden;
+}
+
+.circuit-line-active {
+    background-color: rgba(252, 238, 10, 0.4);
+    box-shadow: 0 0 8px #fcee0a;
+}
+
+.circuit-pulse-packet {
+    position: absolute;
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: #fcee0a;
+    border-radius: 9999px;
+    box-shadow: 0 0 5px #fcee0a;
+    animation: packet-travel 3s infinite linear;
+}
+
+@keyframes packet-travel {
+    0% { left: -10%; opacity: 0; }
+    10%, 90% { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
+}
+
+/* 4. Missions: Urban Drift & HUD */
+.urban-light-streak {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff003c, transparent);
+    opacity: 0.3;
+    animation: light-drift 4s infinite linear;
+}
+
+@keyframes light-drift {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+.scanning-hud {
+    position: absolute;
+    inset: 0px;
+    pointer-events: none;
+    z-index: 20;
+    background: 
+        linear-gradient(90deg, #ff003c 1px, transparent 1px) 0 0 / 20px 20px,
+        linear-gradient(#ff003c 1px, transparent 1px) 0 0 / 20px 20px;
+    opacity: 0.05;
+}
+
+.scanning-line {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 0, 60, 0.5);
+    box-shadow: 0 0 8px #ff003c;
+    animation: h-scan 3s infinite linear;
+}
+
+@keyframes h-scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+.integrity-bar-fill {
+    height: 100%;
+    background-color: #ff003c;
+    box-shadow: 0 0 5px #ff003c;
+    animation: integrity-oscillate 4s infinite ease-in-out;
+}
+
+@keyframes integrity-oscillate {
+    0%, 100% { width: 95%; opacity: 0.8; }
+    50% { width: 70%; opacity: 0.4; }
+}
+
+/* 5. Certificates: Blueprint & Security */
+.bg-blueprint {
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 100px 100px;
+}
+
+.security-stamp {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-width: 4px;
+    border-color: rgba(5, 255, 161, 0.5);
+    color: #05ffa1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cyber', sans-serif;
+    font-weight: 900;
+    font-size: 8px;
+    transform: rotate(-12deg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 30;
+}
+
+.security-stamp::after {
+    content: 'VERIFIED';
+}
+
+.stamp-active {
+    animation: stamp-slam 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stamp-slam {
+    0% { transform: scale(3) rotate(-45deg); opacity: 0; }
+    100% { transform: scale(1) rotate(-12deg); opacity: 0.6; }
+}
+
+/* 6. Timeline: Temporal Stream */
+.temporal-stream {
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.data-packet {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #00f3ff, transparent);
+    animation: data-fall 10s infinite linear;
+}
+
+@keyframes data-fall {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(1000%); }
+}
+
+/* 7. Transmission: Encryption Progress */
+.encryption-bar {
+    height: 0.25rem;
+    background-color: #bd00ff;
+    box-shadow: 0 0 10px #bd00ff;
+    width: 0%;
+}
+
+.encrypting {
+    animation: encrypt-progress 3s forwards linear;
+}
+
+@keyframes encrypt-progress {
+    0% { width: 0%; }
+    20% { width: 15%; }
+    40% { width: 45%; }
+    60% { width: 65%; }
+    80% { width: 95%; }
+    100% { width: 100%; }
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1rem;
+    background-color: #00f3ff;
+    animation: cursor-blink 1s infinite step-end;
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Global Polish: Subtle Glitch */
+.glitch-hover:hover {
+    animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-1deg); }
+    40% { transform: skew(1deg); }
+    60% { transform: skew(-0.5deg); }
+    80% { transform: skew(0.5deg); }
+    100% { transform: skew(0deg); }
+}

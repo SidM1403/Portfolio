@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors - Cyberpunk 2077 Palette */
+  --cyber-black: #020202;
+  --cyber-dark: #0f0f0f;
+  --cyber-gray: #1a1a1a;
+  --cyber-light: #2e2e2e;
+
+  /* The Main Yellow */
+  --cyber-yellow: #fcee0a;
+
+  /* Accents */
+  --neon-blue: #00f0ff;
+  --neon-red: #ff003c;
+  --neon-green: #05ffa1;
+  --neon-purple: #bd00ff;
+
+  /* Fonts */
+  --font-cyber: 'Orbitron', sans-serif;
+  --font-tech: 'Share Tech Mono', monospace;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+@theme {
+  --color-cyber-black: var(--cyber-black);
+  --color-cyber-dark: var(--cyber-dark);
+  --color-cyber-gray: var(--cyber-gray);
+
+  --color-cyber-yellow: var(--cyber-yellow);
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-red: var(--neon-red);
+  --color-neon-green: var(--neon-green);
+  --color-neon-purple: var(--neon-purple);
+
+  --font-cyber: var(--font-cyber);
+  --font-tech: var(--font-tech);
+  --font-body: var(--font-body);
+
+  --animate-glitch: glitch 0.3s linear infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-flicker: flicker 0.15s infinite;
+  --animate-decode: decode 0.5s ease-out forwards;
+  --animate-grid-move: grid-move 3s linear infinite;
+}
+
+@layer base {
+  html, body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--cyber-black);
+    color: #e0e0e0;
+    font-family: var(--font-body);
+    cursor: none;
+  }
+
+  /* Subtle film grain texture for depth */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-cyber);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  .text-glow-yellow {
+    text-shadow: 0 0 calc(5px * var(--audio-glow-intensity, 1)) rgba(252, 238, 10, 0.8), 0 0 calc(15px * var(--audio-glow-intensity, 1)) rgba(252, 238, 10, 0.3);
+    transform: scale(var(--audio-bass-scale, 1));
+    display: inline-block;
+    transition: transform 0.05s ease-out, text-shadow 0.05s ease-out;
+  }
+
+  .box-glow-yellow {
+    box-shadow: 0 0 calc(20px * var(--audio-glow-intensity, 1)) rgba(252, 238, 10, 0.15);
+    transform: scale(var(--audio-bass-scale, 1));
+    transition: transform 0.05s ease-out, box-shadow 0.05s ease-out;
+  }
+
+  .text-glow-blue {
+    text-shadow: 0 0 calc(10px * var(--audio-glow-intensity, 1)) rgba(0, 243, 255, 0.5), 0 0 calc(20px * var(--audio-glow-intensity, 1)) rgba(0, 243, 255, 0.3);
+    transition: text-shadow 0.05s ease-out;
+  }
+
+  .box-glow {
+    box-shadow: 0 0 calc(15px * var(--audio-glow-intensity, 1)) rgba(0, 243, 255, 0.15);
+    transition: box-shadow 0.05s ease-out;
+  }
+
+  /* Custom Neon Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Specific accent for active project could be handled in JSX styles,
+   but this provides a clean base for the scrollable areas */
+  /* Gradient text on section headings */
+  .gradient-text-yellow {
+    background: linear-gradient(135deg, #fcee0a 0%, #00f0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-blue {
+    background: linear-gradient(135deg, #00f0ff 0%, #bd00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-green {
+    background: linear-gradient(135deg, #05ffa1 0%, #00f0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .clip-corner-1 {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  }
+
+  .clip-corner-4 {
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+}
+
+/* Animations */
+@keyframes glitch {
+
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
+  }
+
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
+  }
+
+  62% {
+    transform: translate(0, 0) skew(5deg);
+  }
+}
+
+/* Animated gradient for hero name */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-text {
+  background: linear-gradient(270deg, #fcee0a, #00f0ff, #fcee0a, #05ffa1);
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Infinite logo marquee */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-ltr {
+  animation: marquee-left linear infinite;
+}
+
+.marquee-rtl {
+  animation: marquee-right linear infinite;
+}
+
+/* Pause on container hover */
+.group:hover .marquee-ltr,
+.group:hover .marquee-rtl {
+  animation-play-state: paused;
+}
+
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: perspective(500px) rotateX(60deg) translateY(0);
+  }
+
+  100% {
+    transform: perspective(500px) rotateX(60deg) translateY(100px);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.9;
+  }
+
+  5% {
+    opacity: 0.8;
+  }
+
+  10% {
+    opacity: 0.1;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0.3;
+  }
+
+  60% {
+    opacity: 1;
+  }
+}
+
+/* Scrollbar Hide */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
