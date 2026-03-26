@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import ScanlineOverlay from '../Effects/ScanlineOverlay';
+import WebGLBackground from '../Effects/WebGLBackground';
 import StaggeredMenu from '../Navigation/StaggeredMenu';
 import Minimap from '../Navigation/Minimap';
 
@@ -67,10 +68,11 @@ const Shell = ({ children }) => {
     return (
         <div className="relative min-h-screen w-full bg-cyber-black text-white selection:bg-neon-blue selection:text-black font-tech">
             {/* Global Effects */}
+            <WebGLBackground />
             <ScanlineOverlay />
 
-            {/* Light Grid Overlay */}
-            <div className="fixed inset-0 pointer-events-none z-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_90%)]" />
+            {/* Light Grid Overlay (Retained for structure, but highly transparent) */}
+            <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_90%)]" />
 
             {/* UI Layer */}
             <StaggeredMenu 

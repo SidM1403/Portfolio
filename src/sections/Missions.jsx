@@ -6,6 +6,16 @@ import { ExternalLink, Github, Maximize2, Play, X } from 'lucide-react';
 
 const projects = [
     {
+        title: 'ClipPulse',
+        type: 'AI Gaming Highlight Generator',
+        desc: 'S-Tier AI-powered video pipeline that automates viral short-form content creation from long-form gaming footage and Twitch VODs. Detects high-intensity moments using multi-modal AI (Audio + Vision).',
+        stack: ['Node.js', 'PostgreSQL', 'BullMQ', 'FFmpeg', 'Groq', 'Gemini Pro', 'Cloudflare R2', 'Konva', 'React'],
+        status: 'PRODUCTION',
+        github: 'https://github.com/SidM1403',
+        website: null,
+        image: "/projects/clippulse.png"
+    },
+    {
         title: 'BingeBrain X',
         type: 'AI Media Intelligence',
         desc: 'Premium AI-powered platform with a cinematic Netflix-style interface. Curates bespoke binge itineraries and provides deep analytics on your cinematic DNA.',
