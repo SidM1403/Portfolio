@@ -4,6 +4,23 @@ import { X, ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react
 
 const SHOWCASE_DATA = [
     {
+        title: 'ClipPulse',
+        type: 'AI Gaming Highlight Generator',
+        tagline: 'From Hype to Viral in 60 Seconds',
+        desc: 'Advanced AI pipeline that automates the discovery of viral-worthy gaming moments. Multi-modal analysis combines audio transcription (Groq) with visual frame recognition (Gemini Pro) to generate pixel-perfect clips.',
+        highlights: [
+            '🧠 Multi-modal AI moment detection (Audio + Vision)',
+            '⚡ Distributed processing with BullMQ and Redis',
+            '🎨 Browser-based video editor built with Konva.js',
+            '☁️ Scalable storage on Cloudflare R2',
+        ],
+        stack: ['Node.js', 'PostgreSQL', 'BullMQ', 'FFmpeg', 'Groq', 'Gemini Pro', 'React', 'Konva'],
+        github: 'https://github.com/SidM1403',
+        website: null,
+        color: '#00f3ff',
+        image: "/projects/clippulse.png"
+    },
+    {
         title: 'BingeBrain X',
         type: 'AI Media Intelligence',
         tagline: 'Your Cinematic DNA, Decoded',
@@ -18,7 +35,7 @@ const SHOWCASE_DATA = [
         github: 'https://github.com/SidM1403',
         website: null,
         color: '#ff003c',
-        image: "/projects/bingebrain.png"
+        image: "/projects/bingebrain1.png"
     },
     {
         title: 'WellConnect',

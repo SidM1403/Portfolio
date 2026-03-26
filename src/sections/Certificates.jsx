@@ -9,7 +9,7 @@ const certificates = [
         issuer: "NeoColab",
         date: "May'25",
         id: "CERT-001",
-        link: "https://github.com/SidM1403/MyCert"
+        link: "/Java.pdf"
     },
     {
         title: "Introduction to Hardware and Operating Systems",
@@ -23,14 +23,14 @@ const certificates = [
         issuer: "NPTEL (IIT - Hyderabad)",
         date: "Dec'24",
         id: "CERT-003",
-        link: "https://github.com/SidM1403/MyCert"
+        link: "/nptel.pdf"
     },
     {
         title: "DSA Summer Bootcamp",
         issuer: "CodeQuest (LPU)",
         date: "July'25",
         id: "CERT-004",
-        link: "https://github.com/SidM1403/MyCert"
+        link: "/DSA.pdf"
     }
 ];
 
@@ -54,6 +54,7 @@ const achievements = [
         title: 'Certified Analyst',
         desc: 'Completed Data Labeling Analyst virtual experience with Forage.',
         icon: <CheckCircle className="w-5 h-5 text-neon-red" />,
+        link: '/Forage.pdf'
     },
 ];
 
@@ -166,6 +167,11 @@ const Certificates = () => {
                                     <p className="text-sm font-tech text-gray-400 leading-relaxed tracking-wide group-hover:text-gray-300 transition-colors">
                                         {ach.desc}
                                     </p>
+                                    {ach.link && (
+                                        <a href={ach.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-3 px-3 py-1 border border-white/5 bg-black/40 text-[9px] font-tech text-neon-red hover:border-neon-red/50 transition-all">
+                                            <ExternalLink className="w-3 h-3" /> VERIFY_ACHIEVEMENT
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                             
