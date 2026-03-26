@@ -14,15 +14,15 @@ const eduData = [
     {
         degree: 'INTERMEDIATE (CBSE)',
         school: 'Mount Litera Zee School, Vasco, Goa',
-        period: '2018 – 2021',
-        status: '82.2%',
+        period: '2021 – 2022',
+        status: '84%',
         details: 'Focused on Physics, Chemistry, and Mathematics. Developed strong logical foundations.',
     },
     {
         degree: 'HIGH SCHOOL (CBSE)',
         school: 'Mount Litera Zee School, Vasco, Goa',
-        period: '2018',
-        status: '76.6%',
+        period: '2020-2021',
+        status: '93%',
         details: 'Early interest in technical sciences and mathematical modeling.',
     },
 ];
@@ -34,7 +34,7 @@ const Education = () => {
             
             <div className="max-w-6xl mx-auto w-full relative">
                 <h2 className="text-4xl md:text-6xl font-cyber font-bold mb-16 flex items-center gap-4 text-white relative">
-                    <span className="text-neon-blue">06.</span> ACADEMIC_RECORDS
+                    <span className="text-neon-blue">04.</span> EDUCATION
                     <div className="absolute -bottom-4 left-0 w-40 h-px" style={{ background: 'linear-gradient(to right, #00f3ff, transparent)' }} />
                 </h2>
 

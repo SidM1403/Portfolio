@@ -105,9 +105,6 @@ const Missions = () => {
     return (
         <section id="missions" className="min-h-screen py-20 px-8 flex flex-col justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-cyber-black pointer-events-none" />
-            <div className="urban-light-streak w-full top-[15%] opacity-20" style={{ animationDuration: '6s', animationDelay: '-1s' }} />
-            <div className="urban-light-streak w-full top-[45%] opacity-10" style={{ animationDuration: '10s', animationDelay: '-3s', background: 'linear-gradient(90deg, transparent, #00f3ff, transparent)' }} />
-            <div className="urban-light-streak w-full top-[75%] opacity-20" style={{ animationDuration: '8s', animationDelay: '-2s' }} />
 
             <div className="max-w-7xl mx-auto w-full relative">
 

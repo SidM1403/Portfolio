@@ -65,49 +65,49 @@ function App() {
         </div>
         
         <div id="identity" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="DATA_IDENTIFICATION" color="#00f3ff" />
+          <SectionDivider label="01. DATA_IDENTIFICATION" color="#00f3ff" />
           <div className="flex-1">
             <Identity />
           </div>
         </div>
         
         <div id="systems" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="SYSTEM_ARCHITECTURE" color="#05ffa1" />
+          <SectionDivider label="02. SYSTEM_ARCHITECTURE" color="#05ffa1" />
           <div className="flex-1">
             <Systems />
           </div>
         </div>
         
         <div id="missions" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="MISSION_LOGS" color="#bd00ff" />
+          <SectionDivider label="03. MISSION_LOGS" color="#bd00ff" />
           <div className="flex-1">
             <Missions />
           </div>
         </div>
 
         <div id="education" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="ACADEMIC_RECORDS" color="#00f3ff" />
+          <SectionDivider label="04. ACADEMIC_RECORDS" color="#00f3ff" />
           <div className="flex-1">
             <Education />
           </div>
         </div>
         
         <div id="certificates" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="SECURITY_CLEARANCE" color="#fcee0a" />
+          <SectionDivider label="05. SECURITY_CLEARANCE" color="#fcee0a" />
           <div className="flex-1">
             <Certificates />
           </div>
         </div>
         
         <div id="timeline" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="TEMPORAL_SEQUENCE" color="#00f3ff" />
+          <SectionDivider label="06. TEMPORAL_SEQUENCE" color="#00f3ff" />
           <div className="flex-1">
             <Timeline />
           </div>
         </div>
         
         <div id="transmission" className="min-h-screen relative flex flex-col pt-12">
-          <SectionDivider label="ESTABLISH_UPLINK" color="#00f3ff" />
+          <SectionDivider label="07. ESTABLISH_UPLINK" color="#00f3ff" />
           <div className="flex-1">
             <Transmission />
           </div>

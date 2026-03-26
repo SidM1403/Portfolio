@@ -147,7 +147,7 @@ const ProjectShowcase = ({ projectIndex, onClose }) => {
                                     <img 
                                         src={project.image} 
                                         alt={project.title} 
-                                        className="w-full h-full object-cover transition-all duration-1000" 
+                                        className="w-full h-full object-contain p-6 transition-all duration-1000" 
                                     />
                                 ) : (
                                     <div className="flex flex-col items-center gap-4 opacity-10">

@@ -66,7 +66,7 @@ const Timeline = () => {
             
             <div className="max-w-4xl mx-auto w-full relative">
                 <h2 className="text-4xl md:text-6xl font-cyber font-bold mb-16 flex items-center gap-4 text-white relative">
-                    <span className="text-neon-green">05.</span> DATA_LOG
+                    <span className="text-neon-green">06.</span> DATA_LOG
                     <div className="absolute -bottom-4 left-0 w-40 h-px" style={{ background: 'linear-gradient(to right, #05ffa1, transparent)' }} />
                 </h2>
 

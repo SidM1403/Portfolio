@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ParticleBackground from '../Effects/ParticleBackground';
+
 import ScanlineOverlay from '../Effects/ScanlineOverlay';
 import StaggeredMenu from '../Navigation/StaggeredMenu';
 import Minimap from '../Navigation/Minimap';
@@ -9,6 +9,7 @@ const SECTIONS = [
     { id: 'identity', label: 'ABOUT', aria: 'System identification' },
     { id: 'systems', label: 'STACK', aria: 'Technical architecture' },
     { id: 'missions', label: 'WORK', aria: 'Mission log' },
+    { id: 'education', label: 'ACADEMICS', aria: 'Academic records' },
     { id: 'certificates', label: 'CREDENTIALS', aria: 'Security clearance' },
     { id: 'timeline', label: 'HISTORY', aria: 'Data log' },
     { id: 'transmission', label: 'CONTACT', aria: 'Establish link' },
@@ -67,13 +68,9 @@ const Shell = ({ children }) => {
         <div className="relative min-h-screen w-full bg-cyber-black text-white selection:bg-neon-blue selection:text-black font-tech">
             {/* Global Effects */}
             <ScanlineOverlay />
-            <ParticleBackground />
 
-            {/* 2. Texture Grid Overlay */}
-            <div className="fixed inset-0 pointer-events-none z-0 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_90%)]" />
-
-            {/* 3. Breathing Cyber Grid (Floor) */}
-            <div className="fixed bottom-[-50%] left-[-50%] w-[200%] h-[100%] bg-[linear-gradient(transparent_0%,rgba(0,243,255,0.05)_50%,transparent_100%),linear-gradient(90deg,rgba(0,243,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [transform:perspective(500px)_rotateX(60deg)] animate-grid-move pointer-events-none z-0 opacity-40" />
+            {/* Light Grid Overlay */}
+            <div className="fixed inset-0 pointer-events-none z-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_90%)]" />
 
             {/* UI Layer */}
             <StaggeredMenu 

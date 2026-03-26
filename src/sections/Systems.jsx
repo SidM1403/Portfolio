@@ -3,17 +3,22 @@ import { motion } from 'framer-motion';
 import HolographicCard from '../components/UI/HolographicCard';
 
 const SkillBar = ({ name, level }) => (
-    <div className="mb-4">
-        <div className="flex justify-between text-xs font-tech mb-1">
-            <span className="text-white">{name}</span>
-            <span className="text-neon-blue">{level}%</span>
+    <div className="mb-5 group/bar">
+        <div className="flex justify-between text-[11px] font-tech mb-2 tracking-widest">
+            <span className="text-white/80 group-hover/bar:text-white transition-colors flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-current opacity-50 group-hover/bar:opacity-100 group-hover/bar:shadow-[0_0_8px_currentColor] transition-all" />
+                {name}
+            </span>
+            <span className="text-white/50 group-hover/bar:text-white transition-colors">{level}%</span>
         </div>
-        <div className="h-2 bg-white/10 w-full overflow-hidden">
+        <div className="h-1.5 bg-black/50 rounded-full w-full overflow-hidden border border-white/5">
             <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${level}%` }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                className="h-full bg-neon-blue shadow-[0_0_10px_#00f3ff]"
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: 'easeOut' }}
+                className="h-full bg-gradient-to-r from-current to-white/80 opacity-80 group-hover/bar:opacity-100 transition-opacity"
+                style={{ boxShadow: '0 0 10px currentColor' }}
             />
         </div>
     </div>
@@ -190,109 +195,241 @@ const LogoMarquee = ({ direction = 'left', speed = 35, onHoverTech }) => {
     );
 };
 
-const CARDS = [
-    {
-        title: 'LANGUAGES',
-        skills: [['JAVASCRIPT (ES6+)', 95], ['TYPESCRIPT', 80], ['PYTHON', 75], ['C++', 70]],
-    },
-    {
-        title: 'FRONTEND',
-        skills: [['REACT / NEXT.JS', 90], ['TAILWIND CSS', 92], ['FRAMER MOTION', 80], ['THREE.JS / R3F', 60]],
-    },
-    {
-        title: 'BACKEND',
-        skills: [['NODE.JS / EXPRESS', 85], ['MONGODB', 82], ['PHP / MYSQL', 70], ['DSA', 80]],
-    },
+import { ChevronRight, Database, Layout, Terminal } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
+
+const SKILLS_DATA = {
+    js: { id: 'js', name: 'JavaScript', category: 'Foundation', level: 95, desc: 'Core logic formulation language.', unlocks: ['react', 'node', 'ts'], requires: [] },
+    ts: { id: 'ts', name: 'TypeScript', category: 'Foundation', level: 85, desc: 'Type-safe architecture enforcement.', unlocks: ['react', 'node'], requires: ['js'] },
+    python: { id: 'python', name: 'Python', category: 'Foundation', level: 75, desc: 'Data automation and scripting logic.', unlocks: ['dsa'], requires: [] },
+    cpp: { id: 'cpp', name: 'C++', category: 'Foundation', level: 70, desc: 'Low-level structural programming.', unlocks: ['dsa'], requires: [] },
+    
+    react: { id: 'react', name: 'React / Next.js', category: 'Architecture', level: 90, desc: 'Reactive component-driven interfaces.', unlocks: ['tailwind', 'framer', 'threejs'], requires: ['js', 'ts'] },
+    node: { id: 'node', name: 'Node.js / Express', category: 'Architecture', level: 85, desc: 'Asynchronous backend microservices.', unlocks: ['mongo'], requires: ['js', 'ts'] },
+    php: { id: 'php', name: 'PHP', category: 'Architecture', level: 70, desc: 'Server-side sequential protocols.', unlocks: ['mysql'], requires: [] },
+    dsa: { id: 'dsa', name: 'DSA', category: 'Architecture', level: 80, desc: 'Algorithmic efficiency and structures.', unlocks: [], requires: ['cpp', 'python'] },
+
+    tailwind: { id: 'tailwind', name: 'Tailwind CSS', category: 'Specialization', level: 92, desc: 'Utility-first presentation compiler.', unlocks: [], requires: ['react'] },
+    framer: { id: 'framer', name: 'Framer Motion', category: 'Specialization', level: 80, desc: 'Kinetic interpolation engine.', unlocks: [], requires: ['react'] },
+    threejs: { id: 'threejs', name: 'Three.js / R3F', category: 'Specialization', level: 60, desc: 'Spatial 3D rendering pipeline.', unlocks: [], requires: ['react'] },
+    mongo: { id: 'mongo', name: 'MongoDB', category: 'Specialization', level: 82, desc: 'Non-relational document matrix.', unlocks: [], requires: ['node'] },
+    mysql: { id: 'mysql', name: 'MySQL', category: 'Specialization', level: 70, desc: 'Relational data table index.', unlocks: [], requires: ['php'] }
+};
+
+const COLUMNS = [
+    { id: 'col1', title: 'FOUNDATION_LAYER', icon: <Terminal size={14} className="text-neon-blue" />, keys: ['js', 'ts', 'python', 'cpp'] },
+    { id: 'col2', title: 'ARCHITECTURE_LAYER', icon: <Layout size={14} className="text-neon-green" />, keys: ['react', 'node', 'php', 'dsa'] },
+    { id: 'col3', title: 'SPECIALIZATION_LAYER', icon: <Database size={14} className="text-neon-purple" />, keys: ['tailwind', 'framer', 'threejs', 'mongo', 'mysql'] }
 ];
 
 const Systems = () => {
-    const [activeNode, setActiveNode] = React.useState(null);
-
-    // Dynamic circuit color helper
-    const getCircuitColor = (node) => {
-        if (!node) return 'rgba(252, 238, 10, 0.1)';
-        const cardColors = {
-            LANGUAGES: 'rgba(0, 240, 255, 0.4)',
-            FRONTEND: 'rgba(5, 255, 161, 0.4)',
-            BACKEND: 'rgba(189, 0, 255, 0.4)'
-        };
-        return cardColors[node] || 'rgba(252, 238, 10, 0.4)';
-    };
+    const [activeId, setActiveId] = React.useState(null);
 
     return (
-        <section id="systems" className="min-h-screen py-20 px-4 flex flex-col justify-center relative overflow-hidden" onMouseLeave={() => setActiveNode(null)}>
-            {/* S-Tier Hex Logic Background */}
-            <div className="absolute inset-0 bg-hex-logic opacity-20 pointer-events-none hex-flicker" />
+        <section id="systems" className="min-h-[120vh] py-20 px-4 md:px-8 flex flex-col justify-center relative overflow-hidden">
+            {/* Background elements */}
+            <div className="absolute inset-0 bg-cyber-black pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,243,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
             
-            {/* Interactive Circuit Connectors */}
-            <div className="absolute inset-0 pointer-events-none opacity-40">
-                <div 
-                    className={`circuit-line-path h-[1px] w-[30%] top-[45%] left-0 ${activeNode ? 'circuit-line-active' : ''}`}
-                    style={{ backgroundColor: getCircuitColor(activeNode) }}
-                >
-                    {activeNode && <div className="circuit-pulse-packet" />}
-                </div>
-                <div 
-                    className={`circuit-line-path h-[1px] w-[40%] top-[35%] right-0 ${activeNode ? 'circuit-line-active' : ''}`}
-                    style={{ backgroundColor: getCircuitColor(activeNode) }}
-                >
-                    {activeNode && <div className="circuit-pulse-packet" style={{ animationDirection: 'reverse' }} />}
-                </div>
-            </div>
-
-            <div className="max-w-7xl mx-auto w-full relative">
-
-                {/* Section watermark */}
-                <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden opacity-[0.02]">
-                    <span className="font-cyber font-black text-[15vw] text-cyber-yellow whitespace-nowrap">SYSTEMS</span>
+            <div className="max-w-[1400px] mx-auto w-full relative z-10">
+                <div className="mb-12 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/10 pb-6">
+                    <div>
+                        <div className="flex items-center gap-3 mb-2">
+                            <span className="text-[10px] font-tech text-cyber-yellow tracking-widest uppercase">INTERACTIVE URI // 02</span>
+                            <div className="h-px w-12 bg-cyber-yellow/40" />
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-cyber font-bold text-white tracking-widest uppercase">
+                            SKILL <span className="text-neon-blue">TREE</span>
+                        </h2>
+                    </div>
                 </div>
 
-                <div className="flex justify-end items-center gap-4 mb-4 opacity-40 font-tech text-[10px] tracking-[0.3em] text-neon-green">
-                    <span className="animate-pulse">●</span> SYSTEM_STATUS: ONLINE
-                </div>
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative w-full mb-20">
+                    {/* Left: Interactive Tree UI */}
+                    <div className="lg:w-[65%] flex flex-col md:flex-row gap-6 lg:gap-8 justify-between relative">
+                        {COLUMNS.map((col, idx) => (
+                            <div key={col.id} className="flex-1 flex flex-col gap-4 relative z-10 w-full">
+                                <div className="flex items-center gap-2 mb-4 bg-white/5 border border-white/10 p-2 justify-center backdrop-blur-sm rounded-sm">
+                                    {col.icon}
+                                    <h4 className="text-white/70 font-tech tracking-widest text-[10px]">{col.title}</h4>
+                                </div>
+                                {col.keys.map(key => {
+                                    const skill = SKILLS_DATA[key];
+                                    const isSelected = activeId === key;
+                                    const isReq = activeId && SKILLS_DATA[activeId].requires?.includes(key);
+                                    const isUnlock = activeId && SKILLS_DATA[activeId].unlocks?.includes(key);
+                                    const isDimmed = activeId && !isSelected && !isReq && !isUnlock;
+                                    
+                                    let borderClass = "border-white/10";
+                                    let textClass = "text-white/70";
+                                    let bgClass = "bg-white/[0.02]";
+                                    let extraGlowClass = "";
+                                    let connectorDotClass = "bg-white/20";
+                                    
+                                    if (isSelected) {
+                                        borderClass = "border-neon-blue shadow-[0_0_15px_rgba(0,243,255,0.2)]";
+                                        textClass = "text-neon-blue font-bold tracking-widest";
+                                        bgClass = "bg-neon-blue/[0.15]";
+                                        extraGlowClass = "scale-[1.02] z-20";
+                                        connectorDotClass = "bg-neon-blue shadow-[0_0_8px_#00f3ff]";
+                                    } else if (isReq) {
+                                        borderClass = "border-neon-purple/80 border-dashed shadow-[0_0_10px_rgba(189,0,255,0.1)]";
+                                        textClass = "text-neon-purple";
+                                        bgClass = "bg-neon-purple/5";
+                                        extraGlowClass = "z-10";
+                                        connectorDotClass = "bg-neon-purple animate-pulse";
+                                    } else if (isUnlock) {
+                                        borderClass = "border-neon-green/80 border-dashed shadow-[0_0_10px_rgba(5,255,161,0.1)]";
+                                        textClass = "text-neon-green";
+                                        bgClass = "bg-neon-green/5";
+                                        extraGlowClass = "z-10";
+                                        connectorDotClass = "bg-neon-green animate-pulse";
+                                    } else if (isDimmed) {
+                                        borderClass = "border-white/5";
+                                        textClass = "text-white/20";
+                                        extraGlowClass = "grayscale-[100%] opacity-40";
+                                        connectorDotClass = "bg-white/5";
+                                    }
+                                    
+                                    return (
+                                        <button 
+                                            key={key} 
+                                            onMouseEnter={() => setActiveId(key)}
+                                            onClick={() => setActiveId(key)}
+                                            className={`relative w-full p-4 rounded-md flex flex-col gap-2 transition-all duration-300 backdrop-blur-md border ${borderClass} ${bgClass} ${extraGlowClass} group text-left`}
+                                        >
+                                            <div className="flex items-center justify-between w-full relative">
+                                                <span className={`font-cyber uppercase text-sm md:text-md transition-colors ${textClass}`}>
+                                                    {skill.name}
+                                                </span>
+                                                <div className="flex items-center gap-1 opacity-70 group-hover:opacity-100 transition-opacity">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <div key={i} className={`h-2 w-1.5 ${i < Math.floor(skill.level / 20) ? 'bg-current' : 'bg-current opacity-20'}`} />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            
+                                            {/* Logic Connectors Visualization (Dots) */}
+                                            {idx !== 2 && (
+                                                <div className={`absolute top-1/2 -right-1 h-3 w-1 -translate-y-1/2 rounded-full transition-all duration-300 ${connectorDotClass}`} />
+                                            )}
+                                            {idx !== 0 && (
+                                                <div className={`absolute top-1/2 -left-1 h-3 w-1 -translate-y-1/2 rounded-full transition-all duration-300 ${connectorDotClass}`} />
+                                            )}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        ))}
+                    </div>
 
-                <h2 className="text-4xl md:text-6xl font-cyber font-bold text-end mb-16 relative">
-                    SKILLS <span className="text-cyber-yellow">02.</span>
-                    <div className="absolute -bottom-4 right-0 w-40 h-px" style={{ background: 'linear-gradient(to left, #fcee0a, transparent)' }} />
-                </h2>
-
-                {/* ── Logo Marquee Strip ── */}
-                <div className="mb-12 border-y border-white/5 py-4 bg-black/20 backdrop-blur-sm relative z-20">
-                    <div className="absolute -top-1 -left-1 w-2 h-2 bg-cyber-yellow" />
-                    <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-cyber-yellow" />
-                    <LogoMarquee direction="left" speed={3} onHoverTech={(name) => setActiveNode(name)} />
-                </div>
-
-                {/* ── Skill Cards ── */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-                    {CARDS.map((card, i) => {
-                        const colors = {
-                            LANGUAGES: 'text-neon-blue border-neon-blue/30',
-                            FRONTEND: 'text-neon-green border-neon-green/30',
-                            BACKEND: 'text-neon-purple border-neon-purple/30'
-                        };
-                        const cardStyle = colors[card.title] || 'text-neon-blue border-neon-blue/30';
+                    {/* Right: Neural Deck Active Status HUD */}
+                    <div className="lg:w-[35%] bg-black/60 border border-white/10 backdrop-blur-xl p-6 md:p-8 rounded-lg flex flex-col h-auto min-h-[450px] shadow-[0_0_40px_rgba(0,0,0,0.8)] relative">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-neon-blue/5 rounded-full blur-3xl pointer-events-none" />
                         
-                        return (
-                            <motion.div
-                                key={i}
-                                onMouseEnter={() => setActiveNode(card.title)}
-                                className="relative"
-                            >
-                                <HolographicCard>
-                                    <h3 className={`text-2xl font-cyber ${cardStyle.split(' ')[0]} mb-8 border-b ${cardStyle.split(' ')[1]} pb-2 flex justify-between items-center`}>
-                                        {card.title}
-                                        <span className={`w-2 h-2 rounded-full transition-all duration-300 ${activeNode === card.title ? `bg-current shadow-[0_0_10px_currentColor] scale-125` : 'bg-white/20'}`} />
-                                    </h3>
-                                    {card.skills.map(([name, level]) => (
-                                        <SkillBar key={name} name={name} level={level} />
-                                    ))}
-                                </HolographicCard>
-                            </motion.div>
-                        );
-                    })}
+                        <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
+                            <div className={`w-2.5 h-2.5 rounded-full ${activeId ? 'bg-neon-green animate-pulse shadow-[0_0_10px_#05ffa1]' : 'bg-red-500 shadow-[0_0_10px_#ff0000]'}`} />
+                            <span className={`font-tech text-xs tracking-[0.2em] uppercase ${activeId ? 'text-neon-green' : 'text-red-500'}`}>
+                                {activeId ? 'NEURAL_LINK :: ESTABLISHED' : 'SYSTEM_IDLE :: AWAITING_INPUT'}
+                            </span>
+                        </div>
+
+                        <AnimatePresence mode="wait">
+                            {activeId ? (
+                                <motion.div 
+                                    key={activeId}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex-1 flex flex-col w-full relative z-10"
+                                >
+                                    <div className="mb-6 flex justify-between items-start">
+                                        <div>
+                                            <h3 className="text-4xl font-cyber text-white uppercase mb-2">
+                                                {SKILLS_DATA[activeId].name}
+                                            </h3>
+                                            <div className="font-tech text-[10px] text-neon-blue bg-neon-blue/10 border border-neon-blue/20 px-2 py-1 inline-block uppercase tracking-widest">
+                                                CLASS // {SKILLS_DATA[activeId].category}
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="font-tech text-3xl text-white/90">{SKILLS_DATA[activeId].level}<span className="text-sm opacity-50">%</span></div>
+                                            <div className="text-[9px] font-cyber text-cyber-yellow tracking-[0.2em]">PROFICIENCY</div>
+                                        </div>
+                                    </div>
+
+                                    <p className="font-tech text-gray-400 text-sm mb-8 leading-relaxed border-l-2 border-white/20 pl-4 py-1 italic">
+                                        "{SKILLS_DATA[activeId].desc}"
+                                    </p>
+                                    
+                                    <div className="space-y-6 mt-auto">
+                                        {/* Requirements */}
+                                        {SKILLS_DATA[activeId].requires.length > 0 && (
+                                            <div>
+                                                <h4 className="font-tech text-[10px] text-neon-purple tracking-widest mb-3 flex items-center gap-2 uppercase">
+                                                    <span className="w-1.5 h-1.5 bg-neon-purple rounded-full" /> REQUIRED LOGIC
+                                                    <div className="h-px flex-1 bg-gradient-to-r from-neon-purple/20 to-transparent" />
+                                                </h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {SKILLS_DATA[activeId].requires.map(r => (
+                                                        <span key={r} onClick={() => setActiveId(r)} className="text-xs font-cyber bg-neon-purple/10 hover:bg-neon-purple/30 text-neon-purple px-3 py-1.5 rounded-sm border border-neon-purple/30 cursor-pointer transition-colors">
+                                                            {SKILLS_DATA[r].name}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Suggested Progression / Unlocks */}
+                                        <div>
+                                            <h4 className="font-tech text-[10px] text-neon-green tracking-widest mb-3 flex items-center gap-2 uppercase">
+                                                <span className="w-1.5 h-1.5 bg-neon-green rounded-full" /> SUGGESTED PATHS
+                                                <div className="h-px flex-1 bg-gradient-to-r from-neon-green/20 to-transparent" />
+                                            </h4>
+                                            {SKILLS_DATA[activeId].unlocks.length > 0 ? (
+                                                <div className="flex flex-col gap-2 relative">
+                                                    <div className="absolute left-1.5 top-3 bottom-3 w-px bg-neon-green/20 z-0" />
+                                                    {SKILLS_DATA[activeId].unlocks.map((u, i) => (
+                                                        <div key={u} onClick={() => setActiveId(u)} className="relative z-10 flex items-center gap-3 text-xs md:text-sm font-cyber text-neon-green p-3 border border-neon-green/20 bg-black hover:bg-neon-green/10 cursor-pointer transition-colors rounded-sm ml-4 group">
+                                                            <div className="absolute -left-[18px] top-1/2 -translate-y-1/2 w-4 h-[1px] bg-neon-green/40 group-hover:bg-neon-green transition-colors" />
+                                                            <ChevronRight size={14} className="opacity-50 group-hover:opacity-100" />
+                                                            {SKILLS_DATA[u].name}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className="text-xs font-tech text-white/20 italic p-3 border border-dashed border-white/10 rounded-sm">
+                                                    MAXIMUM NODE PENETRATION ACHIEVED IN THIS BRANCH.
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ) : (
+                                <motion.div 
+                                    className="flex-1 flex flex-col items-center justify-center opacity-[0.15] text-center"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 0.15 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    <div className="relative w-32 h-32 flex items-center justify-center">
+                                        <div className="absolute inset-0 border border-current rounded-full animate-spin-slow" style={{ borderStyle: 'dotted', borderWidth: '2px' }} />
+                                        <Terminal className="w-12 h-12" />
+                                    </div>
+                                    <p className="font-cyber tracking-[0.3em] text-[10px] mt-8">SELECT ANY NODE TO</p>
+                                    <p className="font-cyber tracking-[0.3em] text-[10px] mt-2">INITIALIZE NEURAL LINK</p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
 
+                {/* Legacy Tech Logos (Visual Background Density) */}
+                <div className="border-t border-white/5 pt-8 opacity-60">
+                    <p className="font-tech text-center text-[10px] text-white/30 tracking-[0.3em] uppercase mb-4">BACKGROUND_PROCESS_STACK</p>
+                    <LogoMarquee direction="left" speed={3} />
+                </div>
             </div>
         </section>
     );

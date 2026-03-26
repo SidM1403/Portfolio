@@ -176,7 +176,7 @@ const TerminalWidget = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="fixed bottom-16 right-6 z-50 flex flex-col items-end gap-2"
+                        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2"
                     >
                         {/* Hint tooltip */}
                         <AnimatePresence>
@@ -219,7 +219,7 @@ const TerminalWidget = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 40, scale: 0.95 }}
                         transition={{ duration: 0.25 }}
-                        className="fixed bottom-16 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] border border-neon-green/30 bg-black/95 backdrop-blur-sm shadow-[0_0_40px_rgba(5,255,161,0.1)]"
+                        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[420px] max-w-[calc(100vw-2rem)] border border-neon-green/30 bg-black/95 backdrop-blur-sm shadow-[0_0_40px_rgba(5,255,161,0.1)]"
                         onClick={() => inputRef.current?.focus()}
                     >
                         {/* Title Bar */}

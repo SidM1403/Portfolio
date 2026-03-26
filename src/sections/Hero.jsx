@@ -114,21 +114,8 @@ const Hero = () => {
         >
 
             {/* Background glows + Neural Grid */}
-            <div className="absolute inset-0 bg-neural-grid opacity-30 pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyber-yellow/6 rounded-full blur-[130px] pointer-events-none" />
-            
-            {/* Falling Data Columns - Toned down */}
-            <DataColumn left={5} delay={0} duration={12} />
-            <DataColumn left={15} delay={2} duration={18} />
-            <DataColumn left={85} delay={1} duration={15} />
-            <DataColumn left={95} delay={4} duration={20} />
-
-            {/* Animated Neural Pulse Dots - Toned down */}
-            <div className="neural-pulse-dot top-[20%] left-[15%] opacity-10" style={{ animationDelay: '0s' }} />
-            <div className="neural-pulse-dot top-[30%] left-[80%] opacity-10" style={{ animationDelay: '1.2s' }} />
-            <div className="neural-pulse-dot top-[70%] left-[25%] opacity-10" style={{ animationDelay: '0.8s' }} />
-            <div className="neural-pulse-dot top-[85%] left-[65%] opacity-10" style={{ animationDelay: '2.4s' }} />
-            <div className="neural-pulse-dot top-[45%] left-[50%] opacity-10" style={{ animationDelay: '1.6s' }} />
+            <div className="absolute inset-0 bg-neural-grid opacity-20 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyber-yellow/5 rounded-full blur-[130px] pointer-events-none" />
 
             {/* Content wrapper with HUD corners */}
             <motion.div 

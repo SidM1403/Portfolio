@@ -5,12 +5,22 @@ import { Mail, Linkedin, Github } from 'lucide-react';
 const Transmission = () => {
     const [status, setStatus] = React.useState('IDLE'); // IDLE, ENCRYPTING, SENT
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('ENCRYPTING');
-        setTimeout(() => {
+        const formData = new FormData(e.target);
+        try {
+            await fetch("https://formsubmit.co/ajax/sidhantmaurya1403@gmail.com", {
+                method: "POST",
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
             setStatus('SENT');
-        }, 3000);
+            e.target.reset();
+        } catch (err) {
+            setStatus('IDLE');
+            alert("Transmission failed. Please check your connection.");
+        }
     };
 
     return (
@@ -26,7 +36,7 @@ const Transmission = () => {
             <div className="max-w-4xl w-full relative z-10 text-center">
 
                 <h2 className="text-4xl md:text-6xl font-cyber font-bold mb-8 text-white relative inline-block">
-                    <span className="text-neon-purple">06.</span> CONTACT
+                    <span className="text-neon-purple">07.</span> CONTACT
                     <div className="absolute -bottom-4 left-0 w-40 h-px" style={{ background: 'linear-gradient(to right, #bd00ff, transparent)' }} />
                 </h2>
 
@@ -55,11 +65,13 @@ const Transmission = () => {
                     )}
 
                     <form className={`space-y-6 text-left transition-opacity duration-500 ${status !== 'IDLE' ? 'opacity-20 pointer-events-none' : ''}`} onSubmit={handleSubmit}>
+                        <input type="hidden" name="_captcha" value="false" />
                         <div className="space-y-2 group">
                             <label className="text-[10px] font-tech text-neon-blue/50 ml-2 tracking-widest group-focus-within:text-neon-blue">YOUR NAME</label>
                             <div className="relative">
                                 <input
                                     type="text"
+                                    name="name"
                                     required
                                     className="w-full bg-cyber-light/50 border border-white/10 p-4 text-white font-tech focus:border-neon-blue focus:outline-none focus:bg-cyber-light transition-all clip-corner-1"
                                     placeholder="Enter your name"
@@ -72,6 +84,7 @@ const Transmission = () => {
                             <div className="relative">
                                 <input
                                     type="email"
+                                    name="email"
                                     required
                                     className="w-full bg-cyber-light/50 border border-white/10 p-4 text-white font-tech focus:border-neon-blue focus:outline-none focus:bg-cyber-light transition-all clip-corner-1"
                                     placeholder="Enter your email"
@@ -83,6 +96,7 @@ const Transmission = () => {
                             <label className="text-[10px] font-tech text-neon-blue/50 ml-2 tracking-widest group-focus-within:text-neon-blue">YOUR MESSAGE</label>
                             <textarea
                                 rows={4}
+                                name="message"
                                 required
                                 className="w-full bg-cyber-light/50 border border-white/10 p-4 text-white font-tech focus:border-neon-blue focus:outline-none focus:bg-cyber-light transition-all clip-corner-1 resize-none"
                                 placeholder="Write your message here..."

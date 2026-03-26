@@ -66,24 +66,14 @@ const Certificates = () => {
             
             <div className="max-w-7xl mx-auto mb-16 relative">
                 <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                    className="h-px bg-gradient-to-r from-cyber-yellow via-neon-green to-transparent mb-8"
-                />
-                <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     className="flex items-center gap-4"
                 >
-                    <div className="w-12 h-12 flex items-center justify-center border border-cyber-yellow text-cyber-yellow bg-cyber-yellow/10">
-                        <ShieldCheck className="w-6 h-6 animate-pulse" />
-                    </div>
                     <div>
                         <h2 className="text-4xl md:text-6xl font-cyber font-bold text-white tracking-widest uppercase">
-                            <span className="text-cyber-yellow">04.</span> CERTIFICATIONS
+                            <span className="text-cyber-yellow">05.</span> CERTIFICATIONS
                         </h2>
                         <div className="font-tech text-cyber-yellow pt-2 tracking-widest text-sm">
                             [SECURITY_CLEARANCE_VERIFIED]
@@ -151,36 +141,37 @@ const Certificates = () => {
                     {achievements.map((ach, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20, y: 20 }}
+                            whileInView={{ opacity: 1, x: 0, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="relative group p-8 bg-cyber-black/40 border border-white/5 hover:border-neon-blue/40 transition-all duration-500 rounded-lg overflow-hidden"
+                            transition={{ delay: i * 0.1, duration: 0.6, ease: "easeOut" }}
+                            className="relative group p-8 backdrop-blur-xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all duration-500 rounded-2xl overflow-hidden"
                         >
                             {/* Animated Background Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/0 via-transparent to-neon-blue/0 group-hover:from-neon-blue/5 transition-colors duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] via-transparent to-white/[0.02] group-hover:from-white/[0.05] transition-colors duration-700" />
                             
-                            <div className="flex gap-8 items-start relative z-10">
-                                <div className="p-4 bg-white/5 border border-white/10 group-hover:border-neon-blue/40 group-hover:bg-neon-blue/10 transition-all duration-500 shadow-[0_0_20px_rgba(0,243,255,0)] group-hover:shadow-[0_0_20px_rgba(0,243,255,0.2)]">
+                            <div className="flex gap-6 items-start relative z-10 w-full">
+                                <div className="p-4 bg-black/40 backdrop-blur-md rounded-xl border border-white/10 group-hover:border-white/40 group-hover:scale-110 transition-all duration-500 shadow-xl flex-shrink-0">
                                     {ach.icon}
                                 </div>
                                 <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-[10px] font-tech text-neon-blue tracking-widest uppercase">Commendation_Unlocked // 0{i + 1}</span>
-                                        <div className="h-px flex-1 bg-white/5" />
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className="text-[10px] font-tech text-white/40 tracking-widest uppercase bg-black/40 px-2 py-1 rounded-md border border-white/5">
+                                            CMND // 0{i + 1}
+                                        </span>
                                     </div>
-                                    <h4 className="text-2xl md:text-3xl font-cyber text-white group-hover:text-neon-blue transition-colors uppercase italic mb-4">
+                                    <h4 className="text-xl md:text-2xl font-cyber text-white group-hover:text-cyber-yellow transition-colors uppercase mb-3">
                                         {ach.title}
                                     </h4>
-                                    <p className="text-sm font-tech text-gray-400 leading-relaxed uppercase tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <p className="text-sm font-tech text-gray-400 leading-relaxed tracking-wide group-hover:text-gray-300 transition-colors">
                                         {ach.desc}
                                     </p>
                                 </div>
                             </div>
                             
                             {/* Decorative corner tag */}
-                            <div className="absolute bottom-[-10px] right-[-10px] text-6xl font-cyber text-white/5 group-hover:text-neon-blue/10 transition-colors -rotate-12 select-none">
-                                {i + 1}
+                            <div className="absolute bottom-[-20px] right-[-10px] text-8xl font-cyber text-white/[0.02] group-hover:text-white/[0.05] transition-colors rotate-[-5deg] select-none pointer-events-none">
+                                {String(i + 1).padStart(2, '0')}
                             </div>
                         </motion.div>
                     ))}
